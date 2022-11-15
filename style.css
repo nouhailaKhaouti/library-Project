@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Karla:ital,wght@0,300;1,200;1,300&display=swap');
+
+.left{
+ animation-delay: 2s;
+ animation: run 3s infinite;
+  }
+@keyframes run {
+form{right:40px;}
+to{right:0px;}
+  }
+body{
+    background-color: #F8EDE3; 
+    font-family: 'Dancing Script', cursive;
+}
+
+.section-1{
+    background-color: #DFD3C3;
+}
+
+.button{
+    background-color: #7D6E83;
+    border-radius: 10;
+    box-shadow: 0 4px 4px 0 black;
+    color: white;
+    width: 128px;
+}
+
+.left{
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.head{
+    background-color: #7D6E83;
+    color: white;
+}
+
+.modal_body{
+    background-color: #E4DCCF;
+}
+
+.cart{
+    background-color: #F8EDE3;
+}
+
+.nowrap{
+    white-space:nowrap;
+}
