@@ -9,6 +9,8 @@ form{right:40px;}
 to{right:0px;}
   }
 body{
+    background-image: url("image/bg7.jpg");
+    background-repeat: repeat;
     background-color: #F8EDE3; 
     font-family: 'Dancing Script', cursive;
 }
@@ -47,31 +49,31 @@ body{
     white-space:nowrap;
 }
 
-.form-control.success input {
+.nowrap.success input {
     box-shadow: 0 0 5px 1px green;
   }
   
-.form-control.error input {
+.nowrap.error input {
     box-shadow: 0 0 5px 1px red;
   }
   
-.form-control i {
+.nowrap i {
       visibility: hidden;
       top: 40px;
       right: 10px;
   }
   
-.form-control.success i.fa-check-circle {
+.nowrap.success i.fa-check-circle {
       color: #2ecc71;
       visibility: visible;
   }
   
-.form-control.error i.fa-exclamation-circle {
+.nowrap.error i.fa-exclamation-circle {
       color: #e74c3c;
       visibility: visible;
   }
   
-.form-control small {
+.nowrap small {
       color: #e74c3c;
       /* position: absolute; */
       bottom: 0;
@@ -79,7 +81,34 @@ body{
       visibility: hidden;
   }
   
-.form-control.error small {
+.nowrap.error small {
       visibility: visible;
   }
+
+  .flip-box-inner {
+    position: relative;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
   
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-box:hover .flip-box-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flip-box-front, .flip-box-back {
+    position: absolute;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+
+  /* Style the back side */
+  .flip-box-back {
+    transform: rotateY(180deg);
+  }
+
+  .flip-box {
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }

@@ -10,33 +10,12 @@ signIn.innerHTML = `<button type="submit" class="btn button" onclick="SignIn()">
 register.innerHTML = `<button type="submit" class="btn button" onclick="LogUp()">Register</button>
 `;
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  CheckInput();
-});
+// form.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   CheckInput();
+// });
 
-function deleteMulti() {
-  let array = [];
-  for (i = 0; i < ele.length; i++) {
-    if (ele[i].checked) {
-      array.push(ele.getAttribut("task_id"));
-    }
-  }
 
-  if (confirm("Are you sure you want to Delete?")) {
-    let path = "./php/deleteMulti.php?id=" + id;
-    for (i = 1; i <= array.length; i++) {
-      path = path + "id" + i + "=" + array[i];
-    }
-    window.location.href = path;
-  }
-}
-
-function deletement(id) {
-  if (confirm("Are you sure you want to Delete?")) {
-    window.location.href = "./php/delete.php?id=" + id;
-  }
-}
 
 function LogUp() {
   console.log("hiiii");
@@ -47,41 +26,39 @@ function LogUp() {
   document.getElementById("first").innerHTML = `
   <img src="image/4.png" alt="4" height="400" width="400">
   <div class="fw-bold">
-      <div class="form-control">
-         <img src="image/user.png" alt="user" height="20" width="20"> User
+      <div class="nowrap">
+          <img src="image/user.png" alt="user" height="20" width="20"> User
           Name: &nbsp; &nbsp;
-         <input class="form-control input-md m-1 cart shadow-sm" type="text" name="Name" id="Name" placeholder="enter your userName"
-          required>
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
-          <small>Error message</small>
-      </div>
-          <img src="image/line1.png" alt="" height="20" width="350">
-          <div class="form-control">
-      <label for="email"> <img src="image/email.png" alt="email" height="20" width="20">Email
-          Address:</label>
-      <input class="form-control input-md m-1 cart shadow-sm" type="email" name="email" id="email" placeholder="enter your email address"
-          required>
+          <input class="form-control input-md m-1 cart shadow-sm" type="text" name="Name"
+              id="Name" placeholder="enter your userName" required>
           <i class="fas fa-check-circle"></i>
           <i class="fas fa-exclamation-circle"></i>
           <small>Error message</small>
       </div>
       <img src="image/line1.png" alt="" height="20" width="350">
-      <div class="form-control">                            
-      <label for="password"> <img src="image/password.png" alt="password" height="20"
-              width="20">Password:</label>
-      <input class="form-control input-md m-1 cart shadow-sm" type="password" name="password" placeholder="enter the choosing password"
-          id="password" required>
+      <div class="nowrap">
+          <label for="email"> <img src="image/email.png" alt="email" height="20" width="20">Email
+              Address:</label>
+          <input class="form-control input-md m-1 cart shadow-sm" type="email" name="email"
+              id="email" placeholder="enter your email address" required>
           <i class="fas fa-check-circle"></i>
           <i class="fas fa-exclamation-circle"></i>
           <small>Error message</small>
       </div>
       <img src="image/line1.png" alt="" height="20" width="350">
-      <div class="form-control">                            
-      <label for="Confirme"> <img src="image/comfirme.png" alt="confirme" height="20"
-              width="20">Confirme Password:</label>
-      <input class="form-control input-md m-1 cart shadow-sm" type="password" name="Confirme" placeholder="re-enter your password to comfirme"
-          id="Confirme" required>
+      <div class="nowrap"> <label for="password"> <img src="image/password.png"
+                  alt="password" height="20" width="20">Password:</label>
+          <input class="form-control input-md m-1 cart shadow-sm" type="password" name="password"
+              placeholder="enter the choosing password" id="password" required>
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+      </div>
+      <img src="image/line1.png" alt="" height="20" width="350">
+      <div class="nowrap"> <label for="Confirme"> <img src="image/comfirme.png"
+                  alt="confirme" height="20" width="20">Confirme Password:</label>
+          <input class="form-control input-md m-1 cart shadow-sm" type="password" name="Confirme"
+              placeholder="re-enter your password to comfirme" id="Confirme" required>
           <i class="fas fa-check-circle"></i>
           <i class="fas fa-exclamation-circle"></i>
           <small>Error message</small>
@@ -89,10 +66,9 @@ function LogUp() {
       </br>
       <div class="modal-footer modal_body" id="button">
           <button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
-          <button type="submit" name="creatAccount" id="hide" class="btn button ">Valide</button>
+          <button type="submit" name="save" id="hide" class="btn button ">Valide</button>
       </div>
   </div>`;
-
   // Ouvrir modal form
   $("#Modal").modal("show");
 }
@@ -143,14 +119,14 @@ function setErrorFor(input, message) {
   console.log("error");
   const formControl = input.parentElement;
   const small = formControl.querySelector("small");
-  formControl.className = "form-control error";
+  formControl.className = "nowrap error";
   small.innerText = message;
 }
 
 function setSuccessFor(input) {
   console.log("success");
   const formControl = input.parentElement;
-  formControl.className = "form-control success";
+  formControl.className = "nowrap success";
 }
 
 function SignIn() {
@@ -244,3 +220,27 @@ function initTaskForm() {
   document.forms[0].reset();
   // Hide all action buttons
 }
+
+
+function deleteMulti() {
+  let array = [];
+  for (i = 0; i < ele.length; i++) {
+    if (ele[i].checked) {
+      array.push(ele.getAttribut("task_id"));
+    }
+  }
+
+  if (confirm("Are you sure you want to Delete?")) {
+    let path = "./php/deleteMulti.php?id=" + id;
+    for (i = 1; i <= array.length; i++) {
+      path = path + "id" + i + "=" + array[i];
+    }
+    window.location.href = path;
+  }
+}
+
+function deletement(id) {
+  if (confirm("Are you sure you want to Delete?")) {
+    window.location.href = "./php/delete.php?id=" + id;
+  }
+} 
