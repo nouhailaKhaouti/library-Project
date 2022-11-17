@@ -2,6 +2,14 @@
  include './view/header.php';
  if(isset($_SESSION['user_id'])){
 ?>
+<div id="add_book">
+<button class="btn button" type="submit">Add Book</button>
+</div>
+<div id="add_category">
+<button class="btn button" type="submit" onclick="createCategory()"> Add Category</button>
+</div>
+<br>
+<br>
     <section class="d-flex flex-wrap justify-content-around p-5 section2">
 
         <div class="rounded-3 p-3" style="width:18rem;">
@@ -170,7 +178,11 @@
 
 <?php
 
-include './view/footer.php';
+
+//include "autoloader.php" ;
+ include './view/footer.php';
+
+
 
 }else{
     $_SESSION['error']="you need to register first if you want to see more";

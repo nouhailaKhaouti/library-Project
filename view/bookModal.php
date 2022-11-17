@@ -1,4 +1,4 @@
-<div class="modal fade bd-example-modal-lg shadow-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg shadow-sm" id="ModalBook" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header head text-center">
@@ -6,7 +6,7 @@
                     <img type="button" class="close high" data-dismiss="modal" aria-label="Close" src="image/close.png" alt="close" height="30" width="30">
                 </div>
                 <div class="modal-body modal_body ">
-                    <form action="./php/script.php" method="POST" id="first" class="d-flex justify-content-between pe-5" enctype='multipart/form-data' >
+                    <form action="./php/script.php" method="POST" id="second" class="d-flex justify-content-between pe-5" enctype='multipart/form-data' >
                         <img src="image/4.png" alt="4" height="400" width="400">
                         <div class="fw-bold">
                             <div class="nowrap">
@@ -57,7 +57,7 @@
 									<textarea class="form-control input-md m-1 cart shadow-sm" id="description" name="description" rows="5" cols="33">description...</textarea>
                                 </div>
                                 </br>
-                                <div class="modal-footer modal_body" id="button">
+                                <div class="modal-footer modal_body" id="book_crud">
                                     <button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
                                     <button type="submit" name="save" id="hide" class="btn button ">Create</button>
                                 </div>

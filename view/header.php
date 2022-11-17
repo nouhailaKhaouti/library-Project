@@ -46,10 +46,10 @@ include "./php/user.php";
             </ul>
         <?php else : ?>
             <ul class="list-unstyled text-decoration-none d-flex justify-content-end pt-3 pe-3 ">
-                <li id="signIn"><button class="btn button" type="submit">Sign In</button></li>
+                <li ><button id="signIn" class="btn button" onclick="SignIn()" type="submit">Sign In</button></li>
                 &nbsp;
                 &nbsp;
-                <li id="register"><button class="btn button" type="submit">Register</button></li>
+                <li><button id="register" class="btn button" onclick="LogUp()" type="submit">Register</button></li>
             </ul>
         <?php endif ?>
     </header>

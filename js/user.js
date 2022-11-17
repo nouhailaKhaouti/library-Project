@@ -5,10 +5,11 @@ const confirme = document.getElementById("Confirme");
 const register = document.getElementById("register");
 const signIn = document.getElementById("signIn");
 const form = document.getElementById("first");
-signIn.innerHTML = `<button type="submit" class="btn button" onclick="SignIn()">Sign In</button>
-`;
-register.innerHTML = `<button type="submit" class="btn button" onclick="LogUp()">Register</button>
-`;
+// data changed
+//signIn.innerHTML = `<button type="submit" class="btn button" onclick="SignIn">Sign In</button>
+//`;
+// register.innerHTML = `<button type="submit" class="btn button" onclick="LogUp()">Register</button>
+// `;
 
 // form.addEventListener("submit", (e) => {
 //   e.preventDefault();

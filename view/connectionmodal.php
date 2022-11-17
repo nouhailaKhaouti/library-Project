@@ -6,7 +6,7 @@
                     <img type="button" class="close high" data-dismiss="modal" aria-label="Close" src="image/close.png" alt="close" height="30" width="30">
                 </div>
                 <div class="modal-body modal_body ">
-                    <form action="./php/script.php" method="POST" id="first" class="d-flex justify-content-between pe-5">
+                    <form action="./php/user.php" method="POST" id="first" class="d-flex justify-content-between pe-5">
                         <img src="image/4.png" alt="4" height="400" width="400">
                         <div class="fw-bold">
                             <div class="nowrap">

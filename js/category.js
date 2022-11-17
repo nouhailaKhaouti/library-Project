@@ -1,28 +1,31 @@
-var btn = document.getElementById("button");
+var btn2 = document.getElementById("category_crud");
 
 const add_category = document.getElementById("add_category");
-const form = document.getElementById("second");
-add_category.innerHTML = `<button type="submit" class="btn button" onclick="createCategory()">Register</button>
-`;
+const form2 = document.getElementById("second");
 
-form.addEventListener("submit", savecategory);
 
+form2.addEventListener("submit", savecategory);
 
 
 function createCategory() {
-  console.log("hiiii");
+    
+  console.log("is in category");
+
+  console.log(btn2);
   // initialiser task form
-  initTaskForm();
+
+    //   initTaskForm();
+
   // Afficher le boutton save
-  btn.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
+  btn2.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
   <button type="submit" name="save" id="hide" class="btn high shadow-sm " >Save changes</button>`;
   // Ouvrir modal form
-  $("#Modal").modal("show");
+  $("#ModalCategory").modal("show");
 }
 
 
 function savecategory() {
-  $("#Modal").modal("hide");
+  $("#ModalCategory").modal("hide");
   Swal.fire("Good job!", "You clicked the button!", "success");
   // initTaskForm();
 }
@@ -39,28 +42,21 @@ label
   ).innerHTML = `<input type="hidden" name="id" value="${id}">`;
   // // Définir l’index en entrée cachée pour l’utiliser en Update et Delete
   // Definir FORM INPUTS
-  btn.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
+  btn2.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
   <button type="submit" name="update" onClick="updateCategory()" id="update" class="btn high shadow-sm " >Update</button>`;
   // Ouvrir Modal form
-  $("#Modal").modal("show");
+  $("#ModalCategory").modal("show");
 }
 
 function updateCategory() {
   // Fermer Modal form
-  $("#Modal").modal("hide");
+  $("#ModalCategory").modal("hide");
   Swal.fire("Good job!", "You clicked the button!", "success");
   // Refresh tasks
   // afficher();
 }
 
-function initTaskForm() {
-  // Clear task form from data
-  document.forms[0].reset();
-  // Hide all action buttons
-}
-
-
-function deletement(id) {
+function deleteCat(id) {
   if (confirm("Are you sure you want to Delete?")) {
     window.location.href = "./php/delete.php?id=" + id;
   }
