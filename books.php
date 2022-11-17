@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Karla:ital,wght@0,300;1,200;1,300&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <title>library</title>
-</head>
-
-<body>
-
+<?php
+ include './view/header.php';
+ if(isset($_SESSION['user_id'])){
+?>
     <section class="d-flex flex-wrap justify-content-around p-5 section2">
+
         <div class="rounded-3 p-3" style="width:18rem;">
             <div class="flip-box">
                 <div class="flip-box-inner">
                     <div class="flip-box-front">
-                        <div class="p-3 rounded-top border border-dark shadow-lg m-2  cart ">
-                            <img src="./image/book (7).jpg" class="card-img-top" alt="..." height="300" width="100">
+                        <div class="p-3 cart rounded-top border border-dark shadow-lg m-2">
+                            <img src="./image/book (1).jpg" class="card-img-top" alt="..." height="300" width="100">
                         </div>
                         <div class="rounded-1 border border-dark m-2 text-center shadow-lg  modal_body ">
                             <h5 class="card-title d-flex justify-content-around pt-2">Card title <i
@@ -31,8 +17,11 @@
                         </div>
                     </div>
                     <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
-                        <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
-                        <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        <div>
+                            <h4>Title: <span class="text-muted">still life</span></h4>
+                            <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
+                            <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        </div>
                         <button class="btn button" type="submit">Add to Library</button>
                     </div>
                 </div>
@@ -43,7 +32,7 @@
                 <div class="flip-box-inner">
                     <div class="flip-box-front">
                         <div class="p-3 cart rounded-top border border-dark shadow-lg m-2">
-                            <img src="./image/book (1).jpg" class="card-img-top" alt="..." height="300" width="80">
+                            <img src="./image/book (4).jpg" class="card-img-top" alt="..." height="300" width="100">
                         </div>
                         <div class="rounded-1 border border-dark m-2 text-center shadow-lg  modal_body ">
                             <h5 class="card-title d-flex justify-content-around pt-2">Card title <i
@@ -51,8 +40,11 @@
                         </div>
                     </div>
                     <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
-                        <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
-                        <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        <div>
+                            <h4>Title: <span class="text-muted">still life</span></h4>
+                            <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
+                            <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        </div>
                         <button class="btn button" type="submit">Add to Library</button>
                     </div>
                 </div>
@@ -63,7 +55,7 @@
                 <div class="flip-box-inner">
                     <div class="flip-box-front">
                         <div class="p-3 cart rounded-top border border-dark shadow-lg m-2">
-                            <img src="./image/book (4).jpg" class="card-img-top" alt="..." height="300" width="80">
+                            <img src="./image/book (3).jpg" class="card-img-top" alt="..." height="300" width="100">
                         </div>
                         <div class="rounded-1 border border-dark m-2 text-center shadow-lg  modal_body ">
                             <h5 class="card-title d-flex justify-content-around pt-2">Card title <i
@@ -71,28 +63,11 @@
                         </div>
                     </div>
                     <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
-                        <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
-                        <h4>published: <span class="text-muted">2000-11-07</span></h4>
-                        <button class="btn button" type="submit">Add to Library</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="rounded-3 p-3" style="width:18rem;">
-            <div class="flip-box">
-                <div class="flip-box-inner">
-                    <div class="flip-box-front">
-                        <div class="p-3 cart rounded-top border border-dark shadow-lg m-2">
-                            <img src="./image/book (3).jpg" class="card-img-top" alt="..." height="300" width="80">
+                        <div>
+                            <h4>Title: <span class="text-muted">still life</span></h4>
+                            <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
+                            <h4>published: <span class="text-muted">2000-11-07</span></h4>
                         </div>
-                        <div class="rounded-1 border border-dark m-2 text-center shadow-lg  modal_body ">
-                            <h5 class="card-title d-flex justify-content-around pt-2">Card title <i
-                                    class="bi bi-caret-down p-1"></i> </h5>
-                        </div>
-                    </div>
-                    <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
-                        <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
-                        <h4>published: <span class="text-muted">2000-11-07</span></h4>
                         <button class="btn button" type="submit">Add to Library</button>
                     </div>
                 </div>
@@ -111,8 +86,11 @@
                         </div>
                     </div>
                     <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
-                        <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
-                        <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        <div>
+                            <h4>Title: <span class="text-muted">still life</span></h4>
+                            <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
+                            <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        </div>
                         <button class="btn button" type="submit">Add to Library</button>
                     </div>
                 </div>
@@ -131,8 +109,11 @@
                         </div>
                     </div>
                     <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
-                        <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
-                        <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        <div>
+                            <h4>Title: <span class="text-muted">still life</span></h4>
+                            <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
+                            <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        </div>
                         <button class="btn button" type="submit">Add to Library</button>
                     </div>
                 </div>
@@ -151,8 +132,11 @@
                         </div>
                     </div>
                     <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
-                        <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
-                        <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        <div>
+                            <h4>Title: <span class="text-muted">still life</span></h4>
+                            <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
+                            <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        </div>
                         <button class="btn button" type="submit">Add to Library</button>
                     </div>
                 </div>
@@ -171,8 +155,11 @@
                         </div>
                     </div>
                     <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
-                        <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
-                        <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        <div>
+                            <h4>Title: <span class="text-muted">still life</span></h4>
+                            <h4>Autor: <span class="text-muted">sahar wiliam</span></h4>
+                            <h4>published: <span class="text-muted">2000-11-07</span></h4>
+                        </div>
                         <button class="btn button" type="submit">Add to Library</button>
                     </div>
                 </div>
@@ -181,14 +168,13 @@
     </section>
 
 
+<?php
 
-    <script src="js/vendor.min.js"></script>
-    <script src="js/app.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
+include './view/footer.php';
 
-</html>
+}else{
+    $_SESSION['error']="you need to register first if you want to see more";
+    header("Location: http://localhost/library-project/index.php");
+}
+
+?>

@@ -1,5 +1,5 @@
 <?php
-include "./php/script.php";
+include "./php/user.php";
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ include "./php/script.php";
                 <li>home</li>
                 &nbsp;
                 &nbsp;
-                <li>books</li>
+                <li> <a class="text-decoration-none" href="http://localhost/library-project/books.php">books</a> </li>
                 &nbsp;
                 &nbsp;
                 <li>my library</li>
