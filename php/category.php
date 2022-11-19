@@ -2,12 +2,10 @@
 //INCLUDE DATABASE FILE
 include('database.php');
 //SESSSION IS A WAY TO STORE DATA TO BE USED ACROSS MULTIPLE PAGES
-session_start();
-
 //ROUTING
 if (isset($_POST['save']))        saveCategory();
 if (isset($_POST['update']))      updateCategory();
-if (isset($_POST['delete']))      deleteCategory();
+if (isset($_GET['id']))      deleteCategory();
 
 
 function getCategorys()
@@ -15,21 +13,36 @@ function getCategorys()
     //CODE HERE
     global $link;
     //SQL SELECT
-    $query = mysqli_query($link, "SELECT * FROM category");
-    foreach ($query as $row) {
-        echo `
-            <option value="' . $row->id . '">' . $row->label . '</option>`;
+    $query = "SELECT * FROM category";
+    $category_get = mysqli_query($link,$query);
+    foreach ($category_get as $row) {
+        $id=$row['id'];
+        $category_label=$row['label'];?>
+            <option value="<?php echo $id ?>,"><?php echo $category_label ?></option>
+            <?php
     }
 }
 
-function test_input($data)
+function displayCategorys()
 {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+    //CODE HERE
+    global $link;
+    //SQL SELECT
+    $query = "SELECT * FROM category";
+    $category_display = mysqli_query($link,$query);
+    foreach($category_display as $row ){
+        $id=$row['id'];
+        $category_label=$row['label'];?>
+        <tr>
+        <td><?php echo $id ?></td>
+        <td><?php echo $category_label ?></td>
+        <td><button class="button btn" onClick="editCategory(<?php echo $id ?>,`<?php echo $category_label ?>`)">Update</button>
+        </td>
+        <td><button class="button btn" onClick="deleteCat(<?php echo $id ?>)">Delete</button></td>
+        </tr>
+        <?php
+    }
 }
-
 
 function saveCategory()
 {
@@ -39,8 +52,8 @@ function saveCategory()
     print_r($_POST);
 
     //SQL INSERT   
-    if (isset($_POST["category"])) {
-        $label = test_input($_POST["category"]);
+    if (isset($_POST["label"])) {
+        $label = $_POST["label"];
     }
     $req = mysqli_query($link, "insert into category (id,label) values ('','$label')");
 
@@ -60,9 +73,9 @@ function updateCategory()
     //CODE HERE
     global $link;
     print_r($_POST);
-    $id = test_input($_POST["id"]);
-    if (isset($_POST["category"])) {
-        $label = test_input($_POST["category"]);
+    $id = $_POST["id"];
+    if (isset($_POST["label"])) {
+        $label = $_POST["label"];
     }
 
     $query = mysqli_query($link, "UPDATE category SET label='$label' WHERE id=$id");

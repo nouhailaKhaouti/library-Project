@@ -1,10 +1,8 @@
 var btn2 = document.getElementById("category_crud");
 
 const add_category = document.getElementById("add_category");
-const form2 = document.getElementById("second");
 
-
-form2.addEventListener("submit", savecategory);
+document.getElementById("second").addEventListener("submit", savecategory);
 
 
 function createCategory() {
@@ -34,9 +32,10 @@ function editCategory(id, label) {
   console.log(
     id +
       "  " +
-label
+    label
   );
-  document.getElementById("title").value = label;
+
+  document.getElementById("label").value = label;
   document.getElementById(
     "hidden"
   ).innerHTML = `<input type="hidden" name="id" value="${id}">`;
@@ -58,6 +57,6 @@ function updateCategory() {
 
 function deleteCat(id) {
   if (confirm("Are you sure you want to Delete?")) {
-    window.location.href = "./php/delete.php?id=" + id;
+    window.location.href = "./php/user.php?id=" + id;
   }
 } 

@@ -245,3 +245,5 @@ function deletement(id) {
     window.location.href = "./php/delete.php?id=" + id;
   }
 } 
+
+

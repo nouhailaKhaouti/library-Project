@@ -8,10 +8,28 @@
 <div id="add_category">
 <button class="btn button" type="submit" onclick="createCategory()"> Add Category</button>
 </div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">label</th>
+        <th scope="col">update</th>
+        <th scope="col">delete</th>
+      </tr>
+    </thead>
+    <tbody>
+<?php
+displayCategorys();
+?>
+
+</tbody>
+    </table>
 <br>
 <br>
     <section class="d-flex flex-wrap justify-content-around p-5 section2">
-
+    <?php
+getBooks();
+?>
         <div class="rounded-3 p-3" style="width:18rem;">
             <div class="flip-box">
                 <div class="flip-box-inner">
@@ -179,10 +197,7 @@
 <?php
 
 
-//include "autoloader.php" ;
- include './view/footer.php';
-
-
+ include "autoloader.php" ;
 
 }else{
     $_SESSION['error']="you need to register first if you want to see more";

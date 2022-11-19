@@ -6,15 +6,15 @@
                     <img type="button" class="close high" data-dismiss="modal" aria-label="Close" src="image/close.png" alt="close" height="30" width="30">
                 </div>
                 <div class="modal-body modal_body ">
-                    <form action="./php/script.php" method="POST" id="third" class="d-flex justify-content-between pe-5" >
+                    <form action="./php/user.php" method="POST" id="third" class="d-flex justify-content-between pe-5" >
                         <img src="image/4.png" alt="4" height="400" width="400">
                         <div class="fw-bold">
                             <div class="nowrap">
+                                <div id="hidden">
+                                    
+                                </div>
                                 label: &nbsp; &nbsp;
-                                <input class="form-control input-md m-1 cart shadow-sm" type="text" name="label" id="label" placeholder="enter your userName" required>
-                                <i class="fas fa-check-circle"></i>
-                                <i class="fas fa-exclamation-circle"></i>
-                                <small>Error message</small>
+                                <input class="form-control input-sm m-1 cart shadow-sm" type="text" name="label" id="label" placeholder="enter your userName" required>
                                 <img src="image/line1.png" alt="" height="20" width="350">
                                 </br>
                                 <div class="modal-footer modal_body" id="category_crud">

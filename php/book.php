@@ -2,8 +2,6 @@
 //INCLUDE DATABASE FILE
 include('database.php');
 //SESSSION IS A WAY TO STORE DATA TO BE USED ACROSS MULTIPLE PAGES
-session_start();
-
 //ROUTING
 if (isset($_POST['save']))        saveBook();
 if (isset($_POST['update']))      updateBook();
@@ -44,15 +42,6 @@ function getBooks()
     }
 }
 
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
-
 function saveBook()
 {
     //CODE HERE
@@ -63,13 +52,13 @@ function saveBook()
     //SQL INSERT   
     $id=$_SESSION["user_id"];
     if (isset($_POST["title"]) && isset($_POST["isbi"]) && isset($_POST["description"]) && isset($_POST["autor"]) && isset($_POST["page"]) && isset($_POST["category"]) && isset($_POST["date"])) {
-        $title = test_input($_POST["title"]);
-        $description = test_input($_POST["description"]);
-        $autor = test_input($_POST["autor"]);
-        $category = test_input($_POST["category"]);
-        $page = test_input($_POST["page"]);
-        $isbi = test_input($_POST["isbi"]);
-        $date = test_input($_POST["date"]);
+        $title = $_POST["title"];
+        $description = $_POST["description"];
+        $autor = $_POST["autor"];
+        $category = $_POST["category"];
+        $page = $_POST["page"];
+        $isbi = $_POST["isbi"];
+        $date = $_POST["date"];
         $image_name=$_FILES['image']['name'];
         $tmp_name=$_FILES['image']['tmp_name'];
         $error=$_FILES['image']['error'];
@@ -125,13 +114,13 @@ function updateBook()
    //SQL INSERT   
    $id=$_POST['id'];
    if (isset($_POST["title"]) && isset($_POST["isbi"]) && isset($_POST["description"]) && isset($_POST["autor"]) && isset($_POST["page"]) && isset($_POST["category"]) && isset($_POST["date"])) {
-       $title = test_input($_POST["title"]);
-       $description = test_input($_POST["description"]);
-       $autor = test_input($_POST["autor"]);
-       $category = test_input($_POST["category"]);
-       $page = test_input($_POST["page"]);
-       $isbi = test_input($_POST["isbi"]);
-       $date = test_input($_POST["date"]);
+    $title = $_POST["title"];
+    $description = $_POST["description"];
+    $autor = $_POST["autor"];
+    $category = $_POST["category"];
+    $page = $_POST["page"];
+    $isbi = $_POST["isbi"];
+    $date = $_POST["date"];
        $image_name=$_FILES['image']['name'];
        $tmp_name=$_FILES['image']['tmp_name'];
        $error=$_FILES['image']['error'];
