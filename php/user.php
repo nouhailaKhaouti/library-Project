@@ -14,6 +14,9 @@ if (isset($_GET['book_id']))      deleteBook();
 if (isset($_POST['save']))        saveCategory();
 if (isset($_POST['update']))      updateCategory();
 if (isset($_GET['id']))      deleteCategory();
+
+if (isset($_GET['book_id']) && isset($_GET['type']))      CreateLibrary();
+if (isset($_GET['book'])&& isset($_GET['type_update']))      deleteCategory();
 function test_input($data)
 {
     $data = trim($data);
@@ -65,6 +68,7 @@ function connect()
         if (password_verify($password, $row->user_password)) {
             $_SESSION['user_id'] = $row->id;
             $_SESSION['user_name'] = $row->user_name;
+            $_SESSION['role'] = $row->role;
             $_SESSION['message'] = "Congratulations, you are logged in!";
             if ($row->user_role == 0) {
                 header('location: dashboard.php');
@@ -86,9 +90,11 @@ function getBooks()
 {
     //CODE HERE
     global $link;
+    $user_id=$_SESSION['user_id'];
     //SQL SELECT
     $query = mysqli_query($link, "SELECT * FROM book");
     foreach ($query as $row) {
+
         $category_id = $row['category_id'];
         $id = $row['book_id'];
         $image = $row['image'];
@@ -98,6 +104,8 @@ function getBooks()
         $isbi = $row['isbi'];
         $page = $row['NumberPage'];
         $description = $row['description'];
+        $req=mysqli_query($link,"SELECT * FROM library WHERE user_id=$user_id AND book_id=$id");
+        $rowcount = mysqli_num_rows($req);
 ?>
         <div class="rounded-3 p-3" style="width:18rem;">
             <div class="flip-box">
@@ -116,9 +124,15 @@ function getBooks()
                             <h4>Autor: <span class="text-muted"><?= $autor ?></span></h4>
                             <h4>published: <span class="text-muted"><?= $date ?></span></h4>
                         </div>
-                        <button class="btn button" type="submit">Add to Library</button>
+                        <?php if($_SESSION['role']!=0 && $rowcount==0 ):?>
+                        <button class="btn button" type="submit" >Add to Library</button>
+                        <?php elseif($rowcount>0 && $_SESSION['role']!=0):?>
+                        <button class="btn button" type="submit" onclick="createLibrary(<?php echo $id ?>)" >Modify type</button>
+                        <?php endif ?>
+                        <?php if($_SESSION['role']==0):?>
                         <button class="btn button" type="submit" onClick="editBook(<?php echo $id ?>,`<?php echo $title ?>`,`<?php echo $date ?>`,`<?php echo $description ?>`,`<?php echo $autor ?>`,<?php echo $category_id ?>,<?php echo $isbi ?>,`<?php echo $image ?>`,<?php echo $page ?>)">Update</button>
                         <button class="btn button" type="submit" onClick="deleteBook(<?php echo $id ?>)">delete</button>
+                        <?php endif?>
                     </div>
                 </div>
             </div>
@@ -396,3 +410,38 @@ function deleteCategory()
         die();
     }
 }
+
+
+// ********************************************library*********************************************
+
+function CreateLibrary(){
+    global $link;
+    $book_id=$_GET["book_id"];
+    $type = $_GET["type"];
+    $id=$_SESSION["user_id"];
+    $date=date("Y/m/d");
+    $req=mysqli_query($link,"INSERT INTO `library` VALUES ('','$type','$date','$book_id','$id')");
+    if (!$req) {
+        echo "error";
+    } else {
+        $_SESSION["message"] = "you successfuly add this book to your collection";
+        header("Location: http://localhost/library-project/books.php");
+        die();
+    } 
+}
+
+function UpdateLibrary(){
+    global $link;
+    $book_id=$_GET["book"];
+    $type = $_GET["type_update"];
+    $id=$_SESSION["user_id"];
+    $req=mysqli_query($link,"UPDATE `library` SET `type`=$type  WHERE user_id=$id AND book_id=$book_id");
+    if (!$req) {
+        echo "error";
+    } else {
+        $_SESSION["message"] = "you successfuly updated ";
+        header("Location: http://localhost/library-project/books.php");
+        die();
+    } 
+}
+

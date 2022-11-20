@@ -17,6 +17,7 @@ include "./php/user.php";
 </head>
 
 <body>
+<?php if (isset($_SESSION['role']) && $_SESSION['role']==1) : ?>
     <header class="d-flex justify-content-between">
         <img src="" alt="">
         <?php if (isset($_SESSION['user_id'])) : ?>
@@ -54,6 +55,7 @@ include "./php/user.php";
         <?php endif ?>
     </header>
     <hr class="divider">
+<?php endif?>
     <?php if (isset($_SESSION['message'])) : ?>
         <div class="alert alert-info alert-dismissible fade show">
             <!-- <strong>Success!</strong> -->

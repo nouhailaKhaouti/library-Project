@@ -247,3 +247,21 @@ function deletement(id) {
 } 
 
 
+function category_page(){
+  document.getElementById('categories').classList.remove("d-none");
+  document.getElementById('statique').classList.add('d-none');
+  document.getElementById('user').classList.add('d-none');
+}
+
+function statistique_page(){
+  document.getElementById('categories').classList.add("d-none");
+  document.getElementById('statique').classList.remove('d-none');
+  document.getElementById('user').classList.add('d-none');
+}
+
+function user_page(){
+  document.getElementById('user').classList.remove("d-none");
+  document.getElementById('statique').classList.add('d-none');
+  document.getElementById('categories').classList.add('d-none');
+}
+

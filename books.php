@@ -2,28 +2,17 @@
  include './view/header.php';
  if(isset($_SESSION['user_id'])){
 ?>
+    <div class="row flex-nowrap">
+<?php
+include './view/sideNave.php';
+?>
+
+<div>
+<?php if($_SESSION['role']==0):?>
 <div id="add_book">
 <button class="btn button" type="submit">Add Book</button>
 </div>
-<div id="add_category">
-<button class="btn button" type="submit" onclick="createCategory()"> Add Category</button>
-</div>
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">label</th>
-        <th scope="col">update</th>
-        <th scope="col">delete</th>
-      </tr>
-    </thead>
-    <tbody>
-<?php
-displayCategorys();
-?>
-
-</tbody>
-    </table>
+<?php endif ?>
 <br>
 <br>
     <section class="d-flex flex-wrap justify-content-around p-5 section2">
@@ -192,10 +181,10 @@ getBooks();
             </div>
         </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
     </section>
-
+</div>
+</div>
 
 <?php
-
 
  include "autoloader.php" ;
 
