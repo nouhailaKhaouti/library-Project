@@ -2,6 +2,9 @@
  include './view/header.php';
  if(isset($_SESSION['user_id'])){
 ?>
+    <div id="add_category">
+        <button class="btn button" type="submit" onclick="createCategory()"> Add Category</button>
+    </div>
 <table class="table">
     <thead>
       <tr>

@@ -1,4 +1,4 @@
-<div class="modal fade bd-example-modal-lg shadow-sm" id="ModalLibrary" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg shadow-sm" id="ModalLibrary<?=$id?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header head text-center">
@@ -11,12 +11,14 @@
                         <div class="fw-bold">
                             <div class="nowrap">
                                 <div id="hidden">
-                                    
+                                    <input type="hidden" name="book_id" value="<?=$id?>"> 
                                 </div>
                                 <div class="modal-footer modal_body d-flex justify-content-around" id="library_crud">
-                                    <button type="submit" name="wtr" id="wtr" class="btn button ">Want to read</button>
-                                    <button type="submit" name="r" id="r" class="btn button ">Reading</button>
-                                    <button type="submit" name="ar" id="ar" class="btn button ">Already read</button>
+                                <select class="form-select form-select-sm ms-5 cart shadow-sm" name="type" id="type">
+                                    <option value="Want to read">Want to read</option>
+                                    <option value="reading">reading</option>
+                                    <option value="Already read">Already read</option>
+                                    </select>
                                 </div>
                             </div>
                     </form>

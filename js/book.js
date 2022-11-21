@@ -1,11 +1,7 @@
 var btn1 = document.getElementById("book_crud");
 const add_book = document.getElementById("add_book");
 const form1 = document.getElementById("third");
-add_book.innerHTML = `<button type="submit" class="btn button" onclick="createBook()">add_book</button>
-`;
-
 form1.addEventListener("submit", saveBook);
-
 
 function createBook() {
   console.log("hiiii");

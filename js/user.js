@@ -165,56 +165,7 @@ function SignIn() {
   $("#Modal").modal("show");
 }
 
-function saveTask() {
-  $("#Modal").modal("hide");
-  Swal.fire("Good job!", "You clicked the button!", "success");
-  // initTaskForm();
-}
 
-function editTask(id, title, date, description, priority, type, status) {
-  console.log(
-    id +
-      "  " +
-      title +
-      "  " +
-      date +
-      "  " +
-      description +
-      "   " +
-      priority +
-      "   " +
-      type +
-      "   " +
-      status
-  );
-  document.getElementById("title").value = title;
-  if (type === "2") {
-    document.getElementById("bug").checked = true;
-  } else {
-    document.getElementById("feature").checked = true;
-  }
-  document.getElementById("priority").value = priority;
-  document.getElementById("status").value = status;
-  document.getElementById("date").value = date;
-  document.getElementById("description").value = description;
-  document.getElementById(
-    "hidden"
-  ).innerHTML = `<input type="hidden" name="id" value="${id}">`;
-  // // Définir l’index en entrée cachée pour l’utiliser en Update et Delete
-  // Definir FORM INPUTS
-  btn.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
-  <button type="submit" name="update" onClick="updateTask()" id="update" class="btn high shadow-sm " >Update</button>`;
-  // Ouvrir Modal form
-  $("#Modal").modal("show");
-}
-
-function updateTask() {
-  // Fermer Modal form
-  $("#Modal").modal("hide");
-  Swal.fire("Good job!", "You clicked the button!", "success");
-  // Refresh tasks
-  // afficher();
-}
 
 function initTaskForm() {
   // Clear task form from data
@@ -222,46 +173,4 @@ function initTaskForm() {
   // Hide all action buttons
 }
 
-
-function deleteMulti() {
-  let array = [];
-  for (i = 0; i < ele.length; i++) {
-    if (ele[i].checked) {
-      array.push(ele.getAttribut("task_id"));
-    }
-  }
-
-  if (confirm("Are you sure you want to Delete?")) {
-    let path = "./php/deleteMulti.php?id=" + id;
-    for (i = 1; i <= array.length; i++) {
-      path = path + "id" + i + "=" + array[i];
-    }
-    window.location.href = path;
-  }
-}
-
-function deletement(id) {
-  if (confirm("Are you sure you want to Delete?")) {
-    window.location.href = "./php/delete.php?id=" + id;
-  }
-} 
-
-
-function category_page(){
-  document.getElementById('categories').classList.remove("d-none");
-  document.getElementById('statique').classList.add('d-none');
-  document.getElementById('user').classList.add('d-none');
-}
-
-function statistique_page(){
-  document.getElementById('categories').classList.add("d-none");
-  document.getElementById('statique').classList.remove('d-none');
-  document.getElementById('user').classList.add('d-none');
-}
-
-function user_page(){
-  document.getElementById('user').classList.remove("d-none");
-  document.getElementById('statique').classList.add('d-none');
-  document.getElementById('categories').classList.add('d-none');
-}
 

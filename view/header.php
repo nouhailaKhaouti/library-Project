@@ -17,37 +17,38 @@ include "./php/user.php";
 </head>
 
 <body>
-<?php if (isset($_SESSION['role']) && $_SESSION['role']==1) : ?>
     <header class="d-flex justify-content-between">
         <img src="" alt="">
         <?php if (isset($_SESSION['user_id'])) : ?>
+
             <ul class="list-unstyled text-decoration-none d-flex justify-content-around pt-3 pe-3 ">
-                <li>home</li>
-                &nbsp;
-                &nbsp;
-                <li> <a class="text-decoration-none" href="http://localhost/library-project/books.php">books</a> </li>
-                &nbsp;
-                &nbsp;
-                <li>my library</li>
+                    <li>home</li>
+                    &nbsp;
+                    &nbsp;
+                    <li><a class="text-decoration-none" href="http://localhost/library-project/books.php">books</a> </li>
+                    &nbsp;
+                    &nbsp;
+                    <li>my library</li>
             </ul>
             <ul class="list-unstyled text-decoration-none d-flex justify-content-around pt-3 pe-3 ">
-                <li><?='hello  '. $_SESSION['user_name'] ?></li>
+                <li><?= 'hello  ' . $_SESSION['user_name'] ?></li>
                 &nbsp;
                 &nbsp;
-               <li> <div type="" class="" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img src="image/user.png" alt="user" height="20" width="20">
+                <li>
+                    <div type="" class="" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="image/user.png" alt="user" height="20" width="20">
                     </div>
                     <ul class="dropdown-menu cart">
                         <li class="py-3"><a class="text-decoration-none head " href="#"> profile</a> </li>
                         <li class="py-3"><a class="text-decoration-none head" href="#"> log Out</a> </li>
                     </ul>
-                  </div>
+                    </div>
                 </li>
-                <li ><a class="text-decoration-none btn button" href="./php/clearSession.php">log Out</a></li>
+                <li><a class="text-decoration-none btn button" href="./php/clearSession.php">log Out</a></li>
             </ul>
         <?php else : ?>
             <ul class="list-unstyled text-decoration-none d-flex justify-content-end pt-3 pe-3 ">
-                <li ><button id="signIn" class="btn button" onclick="SignIn()" type="submit">Sign In</button></li>
+                <li><button id="signIn" class="btn button" onclick="SignIn()" type="submit">Sign In</button></li>
                 &nbsp;
                 &nbsp;
                 <li><button id="register" class="btn button" onclick="LogUp()" type="submit">Register</button></li>
@@ -55,7 +56,6 @@ include "./php/user.php";
         <?php endif ?>
     </header>
     <hr class="divider">
-<?php endif?>
     <?php if (isset($_SESSION['message'])) : ?>
         <div class="alert alert-info alert-dismissible fade show">
             <!-- <strong>Success!</strong> -->

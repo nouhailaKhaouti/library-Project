@@ -5,7 +5,7 @@ const add_library = document.getElementById("add_library");
 document.getElementById("fourth").addEventListener("submit", savelibrary);
 
 
-function createLibrary() {
+function createLibrary(id) {
     
   console.log("is in library");
 
@@ -16,35 +16,27 @@ function createLibrary() {
 
   // Afficher le boutton save
   btn3.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
-  <button type="submit" name="save" id="hide" class="btn high shadow-sm " >Save changes</button>`;
+  <button type="submit" name="save_library" id="hide" class="btn high shadow-sm " >Save changes</button>`;
   // Ouvrir modal form
-  $("#ModalCategory").modal("show");
+  let modal="#Modallibrary"+id;
+  $(modal).modal("show");
 }
 
 
-function savecategory() {
-  $("#ModalCategory").modal("hide");
-  Swal.fire("Good job!", "You clicked the button!", "success");
-  // initTaskForm();
-}
-
-function editCategory(id, label) {
+function editCategory(id, type) {
   console.log(
     id +
       "  " +
-    label
+    type
   );
 
-  document.getElementById("label").value = label;
-  document.getElementById(
-    "hidden"
-  ).innerHTML = `<input type="hidden" name="id" value="${id}">`;
+  document.getElementById("type").value = type;
   // // Définir l’index en entrée cachée pour l’utiliser en Update et Delete
   // Definir FORM INPUTS
-  btn2.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
-  <button type="submit" name="update" onClick="updateCategory()" id="update" class="btn high shadow-sm " >Update</button>`;
+  btn3.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
+  <button type="submit" name="update_library"  id="update" class="btn high shadow-sm " >Update</button>`;
   // Ouvrir Modal form
-  $("#ModalCategory").modal("show");
+  $("#ModalLibrary"+id).modal("show");
 }
 
 function updateCategory() {
