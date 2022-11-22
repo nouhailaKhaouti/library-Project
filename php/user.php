@@ -11,13 +11,15 @@ if (isset($_POST['updateProfile']))      UpdateProfile();
 if (isset($_POST['save_book']))        saveBook();
 if (isset($_POST['update_book']))      updateBook();
 if (isset($_GET['book_id']))      deleteBook();
+// if (isset($_GET['bookId']))      getOneBook();
 
 if (isset($_POST['save']))        saveCategory();
 if (isset($_POST['update']))      updateCategory();
 if (isset($_GET['id']))      deleteCategory();
 
-if (isset($_GET['book_id']) && isset($_GET['type']))      CreateLibrary();
-if (isset($_GET['book'])&& isset($_GET['type_update']))      deleteCategory();
+if (isset($_POST['save_library']))      CreateLibrary();
+if (isset($_POST['update_library']))      UpdateLibrary();
+if (isset($_GET['library_id']))      deleteLibrary();
 function test_input($data)
 {
     $data = trim($data);
@@ -28,7 +30,6 @@ function test_input($data)
 
 function creatUser()
 {
-
     global $link;
     //CODE HERE
     print_r($_POST);
@@ -85,37 +86,35 @@ function connect()
     }
 }
 
-function UpdateProfile(){
+function UpdateProfile()
+{
     global $link;
     $email = test_input($_POST["email"]);
     $name = test_input($_POST["Name"]);
-    $password =$_SESSION['password'];
+    $password = $_SESSION['password'];
     $confirme = test_input($_POST["Confirme"]);
-    $Oldpassword =test_input($_POST["oldpassword"]) ;
-    $id=$_SESSION['user_id'];
-    if(password_verify($Oldpassword, $password)){
-        $newpassword=test_input($_POST["newpassword"]);
-        if($newpassword==$confirme){
-            $newpassword=password_hash(test_input($_POST["newpassword"]), PASSWORD_BCRYPT);
-         $req=mysqli_query($link,"UPDATE `user` SET `user_name`='$name',`email_address`='$email',`user_password`='$newpassword' WHERE id=$id");
-         if(!$req){
-            $_SESSION['error'] = "error !";
-            header('location: http://localhost/library-project/dashboard.php');
-         }else{
-            $_SESSION["message"] = "you successfuly updated your account";
-            header("Location: http://localhost/library-project/dashboard.php");
-         }
-        }else{
+    $Oldpassword = test_input($_POST["oldpassword"]);
+    $id = $_SESSION['user_id'];
+    if (password_verify($Oldpassword, $password)) {
+        $newpassword = test_input($_POST["newpassword"]);
+        if ($newpassword == $confirme) {
+            $newpassword = password_hash(test_input($_POST["newpassword"]), PASSWORD_BCRYPT);
+            $req = mysqli_query($link, "UPDATE `user` SET `user_name`='$name',`email_address`='$email',`user_password`='$newpassword' WHERE id=$id");
+            if (!$req) {
+                $_SESSION['error'] = "error !";
+                header('location: http://localhost/library-project/dashboard.php');
+            } else {
+                $_SESSION["message"] = "you successfuly updated your account";
+                header("Location: http://localhost/library-project/dashboard.php");
+            }
+        } else {
             $_SESSION['error'] = "the new password dosen't match up with the confirmation  !";
             header('location: http://localhost/library-project/dashboard.php');
         }
-    }else{
-            // $_SESSION['error'] = "Old password is wrong!";
-            // header('location: http://localhost/library-project/dashboard.php');
-            var_dump($password);
-            var_dump($Oldpassword);
+    } else {
+        $_SESSION['error'] = "Old password is wrong!";
+        header('location: http://localhost/library-project/dashboard.php');
     }
-
 }
 // ********************************************book**********************************************
 
@@ -125,11 +124,12 @@ function getBooks()
 {
     //CODE HERE
     global $link;
-    $user_id=$_SESSION['user_id'];
+    $user_id = $_SESSION['user_id'];
     //SQL SELECT
-    $query = mysqli_query($link, "SELECT * FROM book");
+    $query = mysqli_query($link, "SELECT * FROM book JOIN category ON book.category_id=category.id");
     foreach ($query as $row) {
 
+        $category = $row['label'];
         $category_id = $row['category_id'];
         $id = $row['book_id'];
         $image = $row['image'];
@@ -139,7 +139,8 @@ function getBooks()
         $isbi = $row['isbi'];
         $page = $row['NumberPage'];
         $description = $row['description'];
-        $req=mysqli_query($link,"SELECT * FROM library WHERE user_id=$user_id AND book_id=$id");
+        $req = mysqli_query($link, "SELECT * FROM library WHERE user_id=$user_id AND book_id=$id");
+        $result = mysqli_fetch_object($req);
         $rowcount = mysqli_num_rows($req);
 ?>
         <div class="rounded-3 p-3" name="ligne" style="width:18rem;">
@@ -150,40 +151,161 @@ function getBooks()
                             <img src="<?= $image ?>" class="card-img-top" alt="..." height="300" width="100">
                         </div>
                         <div class="rounded-1 border border-dark m-2 text-center shadow-lg  modal_body ">
-                           <div class="card-title d-flex justify-content-around pt-2" >
-                            <h5 name="titre"><?= $title ?></h5>
-                            <i class="bi bi-caret-down p-1"></i> 
+                            <div class="card-title d-flex justify-content-around pt-2">
+                                <h5 name="titre"><?= $title ?></h5>
+                                <i class="bi bi-caret-down p-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
                         <div>
-                            <h4>Title: <span class="text-muted"><?= $title ?></span></h4>
-                            <h4>Autor: <span class="text-muted"><?= $autor ?></span></h4>
-                            <h4>published: <span class="text-muted"><?= $date ?></span></h4>
+                            <h6>Title: <span class="text-muted"><?= $title ?></span></h6>
+                            <h6>Autor: <span class="text-muted"><?= $autor ?></span></h6>
+                            <h6>Published: <span class="text-muted"><?= $date ?></span></h6>
+                            <h6>Category: <span class="text-muted"><?= $category ?></span></h6>
+                            <h6>Number of pages: <span class="text-muted"><?= $page ?></span></h6>
+                            <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
                         </div>
-                        <div>
-                        <?php if($_SESSION['role']==1 && $rowcount===0 ):?>
-                        <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)" >Add to Library</button>
-                        <?php include "./view/libraryModal.php"?>
-                        <?php elseif($rowcount>0 && $_SESSION['role']==1):?>
-                        <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>)" >Modify type</button>
-                        <?php include "./view/libraryModal.php"?>
-                        <?php else: ?>
-                        <?php endif?>
-                        <?php if($_SESSION['role']==0):?>
-                        <button class="btn button" type="submit" onClick="editBook(<?= $id ?>,`<?= $title ?>`,`<?= $date ?>`,`<?= $description ?>`,`<?= $autor ?>`,<?= $category_id ?>,<?= $isbi ?>,`<?= $image ?>`,<?= $page ?>)">Update</button>
-                        <button class="btn button" type="submit" onClick="deleteBook(<?= $id ?>)">delete</button>
-                        <?php endif?>
+                        <?php if ($_SESSION['role'] == 1 && $rowcount == 0) : ?>
+                            <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library</button>
+                        <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
+                            <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                        <?php endif ?>
+                        <?php if ($_SESSION['role'] == 0) : ?>
+                            <button class="btn button" type="submit" onClick="editBook(<?= $id ?>,`<?= $title ?>`,`<?= $date ?>`,`<?= $description ?>`,`<?= $autor ?>`,<?= $category_id ?>,<?= $isbi ?>,`<?= $image ?>`,<?= $page ?>)">Update</button>
+                            <button class="btn button" type="submit" onClick="deleteBook(<?= $id ?>)">delete</button>
+                        <?php endif ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+}
+
+function display_book($category)
+{
+    global $link;
+    $user_id = $_SESSION['user_id'];
+    $i = 0;
+    //SQL SELECT
+    $query = mysqli_query($link, "SELECT * FROM book JOIN category ON book.category_id=category.id WHERE category.label='$category'");
+    foreach ($query as $row) {
+        $category_label = $row['label'];
+        $category_id = $row['category_id'];
+        $id = $row['book_id'];
+        $image = $row['image'];
+        $title = $row['title'];
+        $autor = $row['autor'];
+        $date = $row['published'];
+        $isbi = $row['isbi'];
+        $page = $row['NumberPage'];
+        $description = $row['description'];
+        $req = mysqli_query($link, "SELECT * FROM library WHERE user_id=$user_id AND book_id=$id");
+        $result = mysqli_fetch_object($req);
+        $rowcount = mysqli_num_rows($req);
+
+        if ($i == 0) {
+        ?>
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center align-item-center">
+                    <div class="rounded-3 p-3" name="ligne" style="width:18rem;">
+                        <div class="flip-box">
+                            <div class="flip-box-inner">
+                                <div class="flip-box-front">
+                                    <div class="p-3 rounded-top border border-dark shadow-lg m-2  cart ">
+                                        <img src="<?= $image ?>" class="card-img-top" alt="..." height="300" width="100">
+                                    </div>
+                                    <div class="rounded-1 border border-dark m-2 text-center shadow-lg  modal_body ">
+                                        <div class="card-title d-flex justify-content-around pt-2">
+                                            <h5 name="titre"><?= $title ?></h5>
+                                            <i class="bi bi-caret-down p-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
+                                    <div>
+                                        <h6>Title: <span class="text-muted"><?= $title ?></span></h6>
+                                        <h6>Autor: <span class="text-muted"><?= $autor ?></span></h6>
+                                        <h6>Published: <span class="text-muted"><?= $date ?></span></h6>
+                                        <h6>Category: <span class="text-muted"><?= $category_label ?></span></h6>
+                                        <h6>Number of pages: <span class="text-muted"><?= $page ?></span></h6>
+                                        <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
+                                    </div>
+                                    <?php if ($_SESSION['role'] == 1 && $rowcount == 0) : ?>
+                                        <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library</button>
+                                    <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
+                                        <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                                    <?php endif ?>
+                                    <?php if ($_SESSION['role'] == 0) : ?>
+                                        <button class="btn button" type="submit" onClick="editBook(<?= $id ?>,`<?= $title ?>`,`<?= $date ?>`,`<?= $description ?>`,`<?= $autor ?>`,<?= $category_id ?>,<?= $isbi ?>,`<?= $image ?>`,<?= $page ?>)">Update</button>
+                                        <button class="btn button" type="submit" onClick="deleteBook(<?= $id ?>)">delete</button>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-item-center">
+                <div class="rounded-3 p-3" name="ligne" style="width:18rem;">
+                    <div class="flip-box">
+                        <div class="flip-box-inner">
+                            <div class="flip-box-front">
+                                <div class="p-3 rounded-top border border-dark shadow-lg m-2  cart ">
+                                    <img src="<?= $image ?>" class="card-img-top" alt="..." height="300" width="100">
+                                </div>
+                                <div class="rounded-1 border border-dark m-2 text-center shadow-lg  modal_body ">
+                                    <div class="card-title d-flex justify-content-around pt-2">
+                                        <h5 name="titre"><?= $title ?></h5>
+                                        <i class="bi bi-caret-down p-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
+                                <div>
+                                    <h6>Title: <span class="text-muted"><?= $title ?></span></h6>
+                                    <h6>Autor: <span class="text-muted"><?= $autor ?></span></h6>
+                                    <h6>Published: <span class="text-muted"><?= $date ?></span></h6>
+                                    <h6>Category: <span class="text-muted"><?= $category_label ?></span></h6>
+                                    <h6>Number of pages: <span class="text-muted"><?= $page ?></span></h6>
+                                    <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
+                                </div>
+                                <?php if ($_SESSION['role'] == 1 && $rowcount == 0) : ?>
+                                    <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library <i class="bi bi-bookmark-dash"></i></button>
+                                <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
+                                    <div class="d-flex justify-content-around">
+                                    <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                                    <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
+                                    </div>
+                                <?php endif ?>
+                                <?php if ($_SESSION['role'] == 0) : ?>
+                                    <button class="btn button" type="submit" onClick="editBook(<?= $id ?>,`<?= $title ?>`,`<?= $date ?>`,`<?= $description ?>`,`<?= $autor ?>`,<?= $category_id ?>,<?= $isbi ?>,`<?= $image ?>`,<?= $page ?>)">Update</button>
+                                    <button class="btn button" type="submit" onClick="deleteBook(<?= $id ?>)">delete</button>
+                                <?php endif ?>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     <?php
+        $i++;
     }
 }
 
+// function getOneBook(){
+
+//      $id=$_GET['bookId'];
+
+//      global $link;
+//      $query = mysqli_query($link, "SELECT * FROM book JOIN category ON book.category_id=category.id WHERE book.book_id=$id");
+
+// }
 function saveBook()
 {
     //CODE HERE
@@ -204,47 +326,39 @@ function saveBook()
         if (isset($_FILES['image']['name'])) {
             $image_name = $_FILES['image']['name'];
             $tmp_name = $_FILES['image']['tmp_name'];
-            $img_size = $_FILES['image']['size'];
+            $img_ex = pathinfo($image_name, PATHINFO_EXTENSION);
+            $img_ex_lc = strtolower($img_ex);
+            $allowed_exs = array("jpg", "jpeg", "png");
 
-                if ($img_size > 125000) {
-                    $_SESSION["error"] = "Sorry , your file is too large.";
-                    header("Location: http://localhost/library-project/books.php");
+            if (in_array($img_ex_lc, $allowed_exs)) {
+                $new_img_name = uniqid("book", true) . '.' . $img_ex_lc;
+                $img_upload_path = 'books/' . $new_img_name;
+                $upload = move_uploaded_file($tmp_name, '../' . $img_upload_path);
+                if ($upload == FALSE) {
+                    $_SESSION["error"] = "Sorry ,";
+                    header("Location: http://localhost/library-project/dashboard.php");
                     die();
-                } else {
-                    $img_ex = pathinfo($image_name, PATHINFO_EXTENSION);
-                    $img_ex_lc = strtolower($img_ex);
-                    $allowed_exs = array("jpg", "jpeg", "png");
-
-                    if (in_array($img_ex_lc, $allowed_exs)) {
-                        $new_img_name = uniqid("book", true) . '.' . $img_ex_lc;
-                        $img_upload_path = 'books/' . $new_img_name;
-                        $upload = move_uploaded_file($tmp_name, '../' . $img_upload_path);
-                        if ($upload == FALSE) {
-                            $_SESSION["error"] = "Sorry ,";
-                            header("Location: http://localhost/library-project/books.php");
-                            die();
-                        }
-                    } else {
-                        $_SESSION["error"] = "Sorry , you can't upload this type of files";
-                        header("Location: http://localhost/library-project/books.php");
-                        die();
-                    }
                 }
             } else {
-                $_SESSION["error"] = "Sorry , unknow error occurred!.";
-                header("Location: http://localhost/library-project/books.php");
+                $_SESSION["error"] = "Sorry , you can't upload this type of files";
+                header("Location: http://localhost/library-project/dashboard.php");
                 die();
             }
-       
+        } else {
+            $_SESSION["error"] = "Sorry , unknow error occurred!.";
+            header("Location: http://localhost/library-project/dashboard.php");
+            die();
+        }
+
         $req = mysqli_query($link, "INSERT INTO `book`(`title`, `autor`, `category_id`, `description`, `NumberPage`, `published`, `isbi`, `image`, `admin_id`) VALUES ('$title','$autor','$category','$description','$page','$date','$isbi','$img_upload_path','$id')");
 
         if ($req) {
             $_SESSION["message"] = "you successfuly added a new category";
-            header("Location: http://localhost/library-project/books.php");
+            header("Location: http://localhost/library-project/dashboard.php");
             die();
         } else {
             $_SESSION["error"] = "your category can't be added for some problems";
-            header("Location: http://localhost/library-project/books.php");
+            header("Location: http://localhost/library-project/dashboard.php");
             die();
         }
     }
@@ -263,7 +377,7 @@ function deleteBook()
         echo "error";
     } else {
         $_SESSION["message"] = "you successfuly deleted this book";
-        header("Location: http://localhost/library-project/books.php");
+        header("Location: http://localhost/library-project/dashboard.php");
         die();
     }
 }
@@ -290,32 +404,24 @@ function updateBook()
             $image_name = $_FILES['image']['name'];
             if ($image_name != "") {
                 $tmp_name = $_FILES['image']['tmp_name'];
-                $img_size = $_FILES['image']['size'];
+                $img_ex = pathinfo($image_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $allowed_exs = array("jpg", "jpeg", "png");
 
-                    if ($img_size > 1250000) {
-                        $_SESSION["error"] = "Sorry , your file is too large.";
-                        header("Location: http://localhost/library-project/books.php");
+                if (in_array($img_ex_lc, $allowed_exs)) {
+                    $new_img_name = uniqid("book", true) . '.' . $img_ex_lc;
+                    $img_upload_path = 'books/' . $new_img_name;
+                    $upload = move_uploaded_file($tmp_name, '../' . $img_upload_path);
+                    if ($upload == FALSE) {
+                        $_SESSION["error"] = "Sorry ,";
+                        header("Location: http://localhost/library-project/dashboard.php");
                         die();
-                    } else {
-                        $img_ex = pathinfo($image_name, PATHINFO_EXTENSION);
-                        $img_ex_lc = strtolower($img_ex);
-                        $allowed_exs = array("jpg", "jpeg", "png");
-
-                        if (in_array($img_ex_lc, $allowed_exs)) {
-                            $new_img_name = uniqid("book", true) . '.' . $img_ex_lc;
-                            $img_upload_path = 'books/' . $new_img_name;
-                            $upload = move_uploaded_file($tmp_name, '../' . $img_upload_path);
-                            if ($upload == FALSE) {
-                                $_SESSION["error"] = "Sorry ,";
-                                header("Location: http://localhost/library-project/books.php");
-                                die();
-                            }
-                        } else {
-                            $_SESSION["error"] = "Sorry , you can't upload this type of files";
-                            header("Location: http://localhost/library-project/books.php");
-                            die();
-                        }
                     }
+                } else {
+                    $_SESSION["error"] = "Sorry , you can't upload this type of files";
+                    header("Location: http://localhost/library-project/dashboard.php");
+                    die();
+                }
             } else {
                 $img_upload_path = $img;
             }
@@ -327,12 +433,12 @@ function updateBook()
 
         if ($req) {
             $_SESSION["message"] = "you successfuly updated this book";
-            header("Location: http://localhost/library-project/books.php");
+            header("Location: http://localhost/library-project/dashboard.php");
             die();
             var_dump("UPDATE `book`  SET `title`='$title' , `autor`='$autor', `category_id`='$category', `description`='$description', `NumberPage`='$page', `published`='$date', `isbi`='$isbi', `image`='$img_upload_path'  WHERE `book_id`='$id'");
         } else {
             $_SESSION["error"] = "your book can't be updated for some problems";
-            header("Location: http://localhost/library-project/books.php");
+            header("Location: http://localhost/library-project/dashboard.php");
             die();
         }
     }
@@ -373,7 +479,7 @@ function displayCategorys()
             </td>
             <td><button class="button btn" onClick="deleteCat(<?php echo $id ?>)">Delete</button></td>
         </tr>
-<?php
+    <?php
     }
 }
 
@@ -392,11 +498,11 @@ function saveCategory()
 
     if ($req) {
         $_SESSION["message"] = "you successfuly added a new category";
-        header("Location: http://localhost/library-project/index.php");
+        header("Location: http://localhost/library-project/dashboard.php");
         die();
     } else {
         $_SESSION["error"] = "your category can't be added for some problems";
-        header("Location: http://localhost/library-project/index.php");
+        header("Location: http://localhost/library-project/dashboard.php");
         die();
     }
 }
@@ -415,11 +521,11 @@ function updateCategory()
     //SQL UPDATE
     if ($query) {
         $_SESSION["message"] = "you successfuly updated your category";
-        header("Location: http://localhost/library-project/index.php");
+        header("Location: http://localhost/library-project/dashboard.php");
         die();
     } else {
         $_SESSION["error"] = "your category can't be updated for some problems";
-        header("Location: http://localhost/library-project/index.php");
+        header("Location: http://localhost/library-project/dashboard.php");
         die();
     }
 }
@@ -436,7 +542,7 @@ function deleteCategory()
         echo "error";
     } else {
         $_SESSION["message"] = "you successfuly deleted this category";
-        header("Location: http://localhost/library-project/index.php");
+        header("Location: http://localhost/library-project/dashboard.php");
         die();
     }
 }
@@ -444,35 +550,140 @@ function deleteCategory()
 
 // ********************************************library*********************************************
 
-function CreateLibrary(){
+function CreateLibrary()
+{
     global $link;
-    $book_id=$_GET["book_id"];
-    $type = $_GET["type"];
-    $id=$_SESSION["user_id"];
-    $date=date("Y/m/d");
-    $req=mysqli_query($link,"INSERT INTO `library` VALUES ('','$type','$date','$book_id','$id')");
+    $book_id = $_POST["book_id"];
+    $type = $_POST["type"];
+    $id = $_SESSION["user_id"];
+    $date = date("Y/m/d");
+    $req = mysqli_query($link, "INSERT INTO `library` VALUES ('','$type','$date','$book_id','$id')");
     if (!$req) {
         echo "error";
     } else {
         $_SESSION["message"] = "you successfuly add this book to your collection";
         header("Location: http://localhost/library-project/books.php");
         die();
-    } 
-}
+    }
+ }
 
-function UpdateLibrary(){
+function UpdateLibrary()
+{
     global $link;
-    $book_id=$_GET["book"];
-    $type = $_GET["type_update"];
-    $id=$_SESSION["user_id"];
-    $date=date("Y/m/d");
-    $req=mysqli_query($link,"UPDATE `library` SET `type`=$type ,`published`=$date  WHERE user_id=$id AND book_id=$book_id");
+    $book_id = $_POST["book_id"];
+    $type = $_POST["type"];
+    $id = $_SESSION["user_id"];
+    $date = date("Y/m/d");
+    $req = mysqli_query($link, "UPDATE `library` SET `type`='$type' ,`date`='$date'  WHERE user_id=$id AND book_id=$book_id");
     if (!$req) {
         echo "error";
     } else {
         $_SESSION["message"] = "you successfuly updated ";
         header("Location: http://localhost/library-project/books.php");
         die();
-    } 
+    }
 }
 
+function getLibrary()
+{
+    //CODE HERE
+    global $link;
+    $user_id = $_SESSION['user_id'];
+    //SQL SELECT
+    $query = mysqli_query($link, "SELECT * FROM book JOIN library ON book.book_id=library.book_id JOIN category ON book.category_id=category.id WHERE library.user_id=$user_id");
+    foreach ($query as $row) {
+
+        $category = $row['label'];
+        $id = $row['book_id'];
+        $image = $row['image'];
+        $title = $row['title'];
+        $autor = $row['autor'];
+        $date = $row['published'];
+        $page = $row['NumberPage'];
+        $description = $row['description'];
+        $date_library = $row['date'];
+        $type = $row['type'];
+    ?>
+        <div class="rounded-3 p-3" name="ligne" style="width:18rem;">
+            <div class="flip-box">
+                <div class="flip-box-inner">
+                    <div class="flip-box-front">
+                        <div class="p-3 rounded-top border border-dark shadow-lg m-2  cart ">
+                            <img src="<?= $image ?>" class="card-img-top" alt="..." height="300" width="100">
+                        </div>
+                        <div class="rounded-1 border border-dark m-2 text-center shadow-lg  modal_body ">
+                            <div class="card-title d-flex justify-content-around pt-2">
+                                <h5 name="titre"><?= $title ?></h5>
+                                <i class="bi bi-caret-down p-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-top border border-dark shadow-lg m-2 cart flip-box-back">
+                        <div>
+                            <h6>Title: <span class="text-muted"><?= $title ?></span></h6>
+                            <h6>Autor: <span class="text-muted"><?= $autor ?></span></h6>
+                            <h6>Published: <span class="text-muted"><?= $date ?></span></h6>
+                            <h6>Category: <span class="text-muted"><?= $category ?></span></h6>
+                            <h6>Number of pages: <span class="text-muted"><?= $page ?></span></h6>
+                            <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
+                        </div>
+                        <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>)"><?= $type ?></button>
+                        <?php include "./view/libraryModal.php" ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php
+    }
+}
+
+function deleteLibrary(){
+    global $link;
+    $id = $_GET["library_id"];
+
+    $req = mysqli_query($link, "DELETE FROM library WHERE id_library=$id");
+
+    if (!$req) {
+        echo "error";
+    } else {
+        header("Location: http://localhost/library-project/mybook.php");
+        die();
+    }
+}
+
+// ****************************************statique*************************************
+
+function Users(){
+global $link;
+    $i=1;
+$query = "SELECT * FROM user";
+$user_display = mysqli_query($link, $query);
+foreach ($user_display as $row) {
+
+    $id = $row['id'];
+    $User_name = $row['user_name'];
+    $email= $row['email_address'];
+    $role= $row['user_role']; ?>
+    <tr>
+        <td><?php echo $i ?></td>
+        <td><?php echo $User_name ?></td>
+        <td><?php echo $email ?>
+        </td>
+        <?php if($role==1): ?>
+        <td>Normal user
+        </td>
+        <?php elseif($role==0):?>
+            <td>Admin
+        </td>
+        <?php endif ?>
+    </tr>
+<?php
+$i++;
+}
+}
+
+function countUser(){
+    global $link;
+$query = "SELECT count(*) FROM user";
+$user_display = mysqli_query($link, $query);
+}

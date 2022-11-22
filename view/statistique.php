@@ -1,5 +1,5 @@
-<div id="statique" name="pages">
-    <div class="col py-3 d-flex flex-wrap">
+<div id="statique" name="pages" class="col-8">
+    <div class="py-3 d-flex flex-wrap">
         <div class="card m-5" style="width: 20rem;background-color: #576F72;">
             <div class="card-body d-flex justify-content-around">
                 <div class="text-white">

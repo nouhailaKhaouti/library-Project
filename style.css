@@ -27,6 +27,25 @@ body{
     width: 128px;
 }
 
+.button1{
+  background-color: #7d6e8300;
+  border: solid #7D6E83;
+  border-radius: 10;
+  box-shadow: 0 4px 4px 0 black;
+  color: #7D6E83;
+  width: 128px;
+}
+
+.button1{
+  background-color: #7d6e8300;
+  border: solid #7D6E83;
+  border-radius: 10;
+  box-shadow: 0 4px 4px 0 black;
+  font-weight:bolder;
+  color: #7D6E83;
+  width: 128px;
+}
+
 .left{
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
@@ -36,6 +55,7 @@ body{
     background-color: #7D6E83;
     color: white;
 }
+
 
 .modal_body{
     background-color: #E4DCCF;
@@ -104,7 +124,6 @@ body{
     width: 100%;
     height: 100%;
     position: absolute;
-    -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
   }
 
@@ -122,3 +141,43 @@ body{
     height: 396px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
   }
+
+ ::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 50px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #7D6E83;
+    background-image: url("./image/images-removebg-preview.png");
+    background-repeat: repeat;
+    background-size: cover;
+    border-radius: 50px;
+  }
+
+
+ul li a {
+    text-align: center;
+    transition: transform .2s;
+    text-decoration: none;
+}
+
+ul li a:hover{
+    color: #7D6E83;
+    text-decoration: underline black;
+    transform: scale(1.5);
+ }
+
+.side{
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 17%; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}

@@ -13,7 +13,9 @@ function createCategory() {
   // initialiser task form
 
     //   initTaskForm();
-
+  document.getElementById(
+    "hidden"
+  ).innerHTML = ``;
   // Afficher le boutton save
   btn2.innerHTML = `<button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
   <button type="submit" name="save" id="hide" class="btn high shadow-sm " >Save changes</button>`;
