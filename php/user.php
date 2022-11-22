@@ -684,6 +684,34 @@ $i++;
 
 function countUser(){
     global $link;
-$query = "SELECT count(*) FROM user";
-$user_display = mysqli_query($link, $query);
+$query = "SELECT * FROM user";
+$users = mysqli_query($link, $query);
+echo mysqli_num_rows($users);
+}
+
+function countBook(){
+    global $link;
+$query = "SELECT * FROM book";
+$books = mysqli_query($link, $query);
+echo mysqli_num_rows($books);
+}
+
+function TopBook(){
+    global $link;
+    $max=0;
+    $top_title="";
+    $req = mysqli_query($link, "SELECT * FROM  book");
+    foreach($req as $row){
+        $id = $row['book_id'];
+        $title = $row['title'];
+     $query = "SELECT * FROM library WHERE book_id=$id";
+     $top=mysqli_query($link, $query);
+       if(mysqli_num_rows($top)>$max){
+        $max=mysqli_num_rows($top);
+        $top_title=$title;
+       }
+    }
+    echo $top_title;
+    echo $max;
+
 }
