@@ -6,7 +6,6 @@
     <br>
     <br>
     <div class="mx-5 col-4">
-
         <button class="btn button1" onclick="search()"><i class="bi bi-search "></i> Search</button>
         <br>
         <br>

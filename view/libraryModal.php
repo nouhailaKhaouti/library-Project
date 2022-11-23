@@ -1,5 +1,5 @@
-<div class="modal fade bd-example-modal-lg shadow-sm" id="ModalLibrary" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade bd-example-modal shadow-sm" id="ModalLibrary" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal " role="document">
         <div class="modal-content">
             <div class="modal-header head text-center">
                 <h4 class="modal-title" id="ModalLabel">Add to library</h4>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="modal-footer modal_body" id="library_crud">
                         <button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
-                        <button type="submit" name="save_library" onclick="Category()" id="hide" class="btn button ">Create</button>
+                        <button type="submit" name="save_library" onclick="Library()" id="hide" class="btn button ">Create</button>
                     </div>
                 </form>
             </div>

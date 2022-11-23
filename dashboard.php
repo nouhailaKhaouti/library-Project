@@ -42,7 +42,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 0) {
                         </div>
                     <?php endif ?>
                 </div>
-                <div class="d-none col-10" name="pages" id="profile">
+                <div class="d-none col-8 ms-5" name="pages" id="profile">
                     <?php include './view/profile.php' ?>
                 </div>
                 <?php include './view/statistique.php' ?>

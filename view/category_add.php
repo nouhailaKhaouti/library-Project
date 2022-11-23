@@ -1,8 +1,9 @@
-<div id="categories" name="pages" class="mt-5 d-none col-8" >
+<div id="categories" name="pages" class="mt-5 d-none col-9 ms-5" >
     <div id="add_category">
         <button class="btn button" type="submit" onclick="createCategory()"> Add Category</button>
     </div>
-    <table class="table mt-5 ms-4 ">
+    <div class="table-responsive">
+    <table class="table mt-5 ms-4  ">
         <thead class="head">
             <tr>
                 <th scope="col">#</th>
@@ -17,4 +18,5 @@
             ?>
         </tbody>
     </table>
+    </div>
 </div>

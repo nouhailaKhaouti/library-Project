@@ -22,6 +22,7 @@ document.getElementById(
   <button type="submit" name="save_library" id="hide" onclick="Library()" class="btn high shadow-sm " >Save changes</button>`;
   // Ouvrir modal form
   $("#ModalLibrary").modal("show");
+  console.log("is in library");
 }
 
 

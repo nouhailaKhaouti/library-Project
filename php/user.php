@@ -169,7 +169,10 @@ function getBooks()
                         <?php if ($_SESSION['role'] == 1 && $rowcount == 0) : ?>
                             <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library</button>
                         <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
-                            <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                            <div class="d-flex justify-content-around">
+                                    <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                                    <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
+                                    </div>
                         <?php endif ?>
                         <?php if ($_SESSION['role'] == 0) : ?>
                             <button class="btn button" type="submit" onClick="editBook(<?= $id ?>,`<?= $title ?>`,`<?= $date ?>`,`<?= $description ?>`,`<?= $autor ?>`,<?= $category_id ?>,<?= $isbi ?>,`<?= $image ?>`,<?= $page ?>)">Update</button>
@@ -235,8 +238,10 @@ function display_book($category)
                                     <?php if ($_SESSION['role'] == 1 && $rowcount == 0) : ?>
                                         <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library</button>
                                     <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
-                                        <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
-                                    <?php endif ?>
+                                        <div class="d-flex justify-content-around">
+                                    <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                                    <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
+                                    </div>                                    <?php endif ?>
                                     <?php if ($_SESSION['role'] == 0) : ?>
                                         <button class="btn button" type="submit" onClick="editBook(<?= $id ?>,`<?= $title ?>`,`<?= $date ?>`,`<?= $description ?>`,`<?= $autor ?>`,<?= $category_id ?>,<?= $isbi ?>,`<?= $image ?>`,<?= $page ?>)">Update</button>
                                         <button class="btn button" type="submit" onClick="deleteBook(<?= $id ?>)">delete</button>
@@ -345,9 +350,7 @@ function saveBook()
                 die();
             }
         } else {
-            $_SESSION["error"] = "Sorry , unknow error occurred!.";
-            header("Location: http://localhost/library-project/dashboard.php");
-            die();
+            $img_upload_path = 'books/default.jpg';
         }
 
         $req = mysqli_query($link, "INSERT INTO `book`(`title`, `autor`, `category_id`, `description`, `NumberPage`, `published`, `isbi`, `image`, `admin_id`) VALUES ('$title','$autor','$category','$description','$page','$date','$isbi','$img_upload_path','$id')");
@@ -627,8 +630,10 @@ function getLibrary()
                             <h6>Number of pages: <span class="text-muted"><?= $page ?></span></h6>
                             <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
                         </div>
-                        <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>)"><?= $type ?></button>
-                        <?php include "./view/libraryModal.php" ?>
+                        <div class="d-flex justify-content-around">
+                                    <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $type ?>`)"><?= $type ?></button>
+                                    <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -711,7 +716,12 @@ function TopBook(){
         $top_title=$title;
        }
     }
-    echo $top_title;
-    echo $max;
+?>
+
+                    
+                    <h5 class="card-title">book title:<?= $top_title?></h5>
+                    <h6 class="card-subtitle mb-2  "><?= $max?> times</h6>
+    <?php 
+
 
 }

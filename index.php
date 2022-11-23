@@ -1,5 +1,6 @@
 <?php  include './view/header.php' ?>
-    <section class="m-1 p-3 section-1">
+<div class="row">
+    <section class="m-1 p-3 section-1 col-12">
         <div class="d-flex justify-content-around px-5  ">
             <div class="ps-5 pt-5">
                 <h1 class="text-center ps-5">Welcome to NFlibrary</h1>
@@ -13,7 +14,7 @@
             <img class="position-relative d-none d-md-block " height="350" width="350" src="image/1.png" alt="1">
         </div>
         <div class="d-flex justify-content-between ">
-            <img src="image/line2.png" alt="" height="20" width="350">
+            <img src="image/line2.png" class="d-none d-sm-inline" alt="" height="20" width="350">
             <div class="d-flex justify-content-between">
                 <p class="fs-5 d-none d-md-block"><strong>For more injoignable experience</strong> </p>
                 &nbsp;
@@ -21,10 +22,10 @@
                 &nbsp;
                 <button class="btn button">join us</button>
             </div>
-            <img src="image/line1.png" alt="" height="20" width="500">
+            <img src="image/line1.png" class="d-none d-sm-inline" alt="" height="20" width="500">
         </div>
     </section>
-    <section class="p-5 text-center">
+    <section class="p-5 text-center col-12">
         <div class="d-flex justify-content-around">
             <img class="position-absolute start-0 d-none d-md-block" src="image/arrow.png" alt="right-arrow">
             <img class="position-relative d-none d-md-block" src="image/2.png" alt="2" height="300" width="300">
@@ -45,7 +46,7 @@
             <img class="position-absolute end-0 left d-none d-md-block" src="image/arrow.png" alt="left-arrow">
         </div>
     </section>
-
+</div>
     <!-- ********************************Connection Modal*************************************** -->
     <?php
     include './view/connectionmodal.php'; ?>
