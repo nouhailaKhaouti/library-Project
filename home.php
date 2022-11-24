@@ -5,7 +5,7 @@ if (isset($_SESSION['user_id'])) {
 
     <div class="d-flex justify-content-around align-item-center">
         <div class="mt-5 d-none d-md-block">
-        <img src="./image/6.png" alt="6" width="400" height="300" class="mt-5">
+            <img src="./image/6.png" alt="6" width="400" height="300" class="mt-5">
         </div>
         <section class="pt-5 pb-5">
             <div class="container d-flex justify-content-center align-item-center">
@@ -23,7 +23,7 @@ if (isset($_SESSION['user_id'])) {
                                 <?php
                                 display_book("Art");
                                 ?>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -42,14 +42,14 @@ if (isset($_SESSION['user_id'])) {
                 </a>
                 <div class="row">
                     <div class="col-12 text-center d-flex justify-content-around">
-                    <img class="position-absolute start-0 d-none d-sm-block" src="image/arrow.png" alt="right-arrow">
+                        <img class="position-absolute start-0 d-none d-sm-block" src="image/arrow.png" alt="right-arrow">
                         <h3 class="mb-3">Classic Category </h3>
                     </div>
                     <div class="col-12">
                         <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                
-                            <?php
+
+                                <?php
                                 display_book("Classic");
                                 ?>
                             </div>
@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </section>
         <div class="mt-5 d-none d-md-block" style="margin-top:8rem;">
-        <img src="./image/5.png" alt="5" width="600" height="400" class="mt-5">
+            <img src="./image/5.png" alt="5" width="600" height="400" class="mt-5">
         </div>
     </div>
     <div class="d-flex justify-content-around align-item-center">
@@ -82,9 +82,9 @@ if (isset($_SESSION['user_id'])) {
                     <div class="col-12">
                         <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                            <?php
+                                <?php
                                 display_book("Science");
-                            ?>
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -96,15 +96,15 @@ if (isset($_SESSION['user_id'])) {
         </section>
     </div>
     <div class="d-flex justify-content-between mb-5">
-    <img src="image/line1.png" alt="" height="20" width="750" class="d-none d-sm-block">
-            <div class="d-flex justify-content-between">
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                <a class="btn button" href="books.php">See More</a>
-            </div>
-            <img src="image/line2.png" alt="" height="20" width="250" class="d-none d-sm-block">
+        <img src="image/line1.png" alt="" height="20" width="750" class="d-none d-sm-block">
+        <div class="d-flex justify-content-between">
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <a class="btn button" href="books.php">See More</a>
         </div>
+        <img src="image/line2.png" alt="" height="20" width="250" class="d-none d-sm-block">
+    </div>
 <?php
 
     include "autoloader.php";

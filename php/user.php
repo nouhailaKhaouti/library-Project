@@ -167,12 +167,14 @@ function getBooks()
                             <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
                         </div>
                         <?php if ($_SESSION['role'] == 1 && $rowcount == 0) : ?>
-                            <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library</button>
-                        <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
                             <div class="d-flex justify-content-around">
-                                    <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
-                                    <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
-                                    </div>
+                                <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library </button>
+                                <i class="bi bi-bookmark-dash-fill"></i>
+                            </div> <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
+                            <div class="d-flex justify-content-around">
+                                <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                                <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
+                            </div>
                         <?php endif ?>
                         <?php if ($_SESSION['role'] == 0) : ?>
                             <button class="btn button" type="submit" onClick="editBook(<?= $id ?>,`<?= $title ?>`,`<?= $date ?>`,`<?= $description ?>`,`<?= $autor ?>`,<?= $category_id ?>,<?= $isbi ?>,`<?= $image ?>`,<?= $page ?>)">Update</button>
@@ -236,12 +238,14 @@ function display_book($category)
                                         <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
                                     </div>
                                     <?php if ($_SESSION['role'] == 1 && $rowcount == 0) : ?>
-                                        <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library</button>
-                                    <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
                                         <div class="d-flex justify-content-around">
-                                    <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
-                                    <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
-                                    </div>                                    <?php endif ?>
+                                            <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library </button>
+                                            <i class="bi bi-bookmark-dash-fill"></i>
+                                        </div> <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
+                                        <div class="d-flex justify-content-around">
+                                            <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                                            <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
+                                        </div> <?php endif ?>
                                     <?php if ($_SESSION['role'] == 0) : ?>
                                         <button class="btn button" type="submit" onClick="editBook(<?= $id ?>,`<?= $title ?>`,`<?= $date ?>`,`<?= $description ?>`,`<?= $autor ?>`,<?= $category_id ?>,<?= $isbi ?>,`<?= $image ?>`,<?= $page ?>)">Update</button>
                                         <button class="btn button" type="submit" onClick="deleteBook(<?= $id ?>)">delete</button>
@@ -253,7 +257,7 @@ function display_book($category)
                 </div>
             </div>
         <?php
-        }
+        }else{
         ?>
         <div class="carousel-item">
             <div class="d-flex justify-content-center align-item-center">
@@ -281,11 +285,14 @@ function display_book($category)
                                     <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
                                 </div>
                                 <?php if ($_SESSION['role'] == 1 && $rowcount == 0) : ?>
-                                    <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library <i class="bi bi-bookmark-dash"></i></button>
+                                    <div class="d-flex justify-content-around">
+                                        <button class="btn button" type="submit" onclick="createLibrary(<?= $id ?>)">Add to Library </button>
+                                        <i class="bi bi-bookmark-dash-fill"></i>
+                                    </div>
                                 <?php elseif ($rowcount > 0 && $_SESSION['role'] == 1) : ?>
                                     <div class="d-flex justify-content-around">
-                                    <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
-                                    <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
+                                        <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $result->type ?>`)"><?= $result->type ?></button>
+                                        <i class="bi bi-bookmark-check-fill mt-1" onclick="deleteLibrary(<?= $id ?>)"></i>
                                     </div>
                                 <?php endif ?>
                                 <?php if ($_SESSION['role'] == 0) : ?>
@@ -299,6 +306,7 @@ function display_book($category)
             </div>
         </div>
     <?php
+    }
         $i++;
     }
 }
@@ -568,7 +576,7 @@ function CreateLibrary()
         header("Location: http://localhost/library-project/books.php");
         die();
     }
- }
+}
 
 function UpdateLibrary()
 {
@@ -631,97 +639,103 @@ function getLibrary()
                             <h6>Description: <span class="text-muted"><?= $description ?></span></h6>
                         </div>
                         <div class="d-flex justify-content-around">
-                                    <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $type ?>`)"><?= $type ?></button>
-                                    <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
+                            <button class="btn button" type="submit" onclick="editLibrary(<?= $id ?>,`<?= $type ?>`)"><?= $type ?></button>
+                            <i class="bi bi-bookmark-check-fill" onclick="deleteLibrary(<?= $id ?>)"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<?php
+    <?php
     }
 }
 
-function deleteLibrary(){
+function deleteLibrary()
+{
     global $link;
     $id = $_GET["library_id"];
-
-    $req = mysqli_query($link, "DELETE FROM library WHERE id_library=$id");
+    $user_id = $_SESSION["user_id"];
+    $req = mysqli_query($link, "DELETE FROM library WHERE book_id=$id AND user_id=$user_id");
 
     if (!$req) {
         echo "error";
     } else {
         header("Location: http://localhost/library-project/mybook.php");
         die();
+        echo $id;
     }
 }
 
 // ****************************************statique*************************************
 
-function Users(){
-global $link;
-    $i=1;
-$query = "SELECT * FROM user";
-$user_display = mysqli_query($link, $query);
-foreach ($user_display as $row) {
-
-    $id = $row['id'];
-    $User_name = $row['user_name'];
-    $email= $row['email_address'];
-    $role= $row['user_role']; ?>
-    <tr>
-        <td><?php echo $i ?></td>
-        <td><?php echo $User_name ?></td>
-        <td><?php echo $email ?>
-        </td>
-        <?php if($role==1): ?>
-        <td>Normal user
-        </td>
-        <?php elseif($role==0):?>
-            <td>Admin
-        </td>
-        <?php endif ?>
-    </tr>
-<?php
-$i++;
-}
-}
-
-function countUser(){
+function Users()
+{
     global $link;
-$query = "SELECT * FROM user";
-$users = mysqli_query($link, $query);
-echo mysqli_num_rows($users);
+    $i = 1;
+    $query = "SELECT * FROM user";
+    $user_display = mysqli_query($link, $query);
+    foreach ($user_display as $row) {
+
+        $id = $row['id'];
+        $User_name = $row['user_name'];
+        $email = $row['email_address'];
+        $role = $row['user_role']; ?>
+        <tr>
+            <td><?php echo $i ?></td>
+            <td><?php echo $User_name ?></td>
+            <td><?php echo $email ?>
+            </td>
+            <?php if ($role == 1) : ?>
+                <td>Normal user
+                </td>
+            <?php elseif ($role == 0) : ?>
+                <td>Admin
+                </td>
+            <?php endif ?>
+        </tr>
+    <?php
+        $i++;
+    }
 }
 
-function countBook(){
+function countUser()
+{
     global $link;
-$query = "SELECT * FROM book";
-$books = mysqli_query($link, $query);
-echo mysqli_num_rows($books);
+    $query = "SELECT * FROM user";
+    $users = mysqli_query($link, $query);
+    echo mysqli_num_rows($users);
 }
 
-function TopBook(){
+function countBook()
+{
     global $link;
-    $max=0;
-    $top_title="";
+    $query = "SELECT * FROM book";
+    $books = mysqli_query($link, $query);
+    echo mysqli_num_rows($books);
+}
+
+function TopBook()
+{
+    global $link;
+    $max = 0;
+    $top_title = "";
     $req = mysqli_query($link, "SELECT * FROM  book");
-    foreach($req as $row){
+    foreach ($req as $row) {
         $id = $row['book_id'];
         $title = $row['title'];
-     $query = "SELECT * FROM library WHERE book_id=$id";
-     $top=mysqli_query($link, $query);
-       if(mysqli_num_rows($top)>$max){
-        $max=mysqli_num_rows($top);
-        $top_title=$title;
-       }
+        $query = "SELECT * FROM library WHERE book_id=$id";
+        $top = mysqli_query($link, $query);
+        if (mysqli_num_rows($top) > $max) {
+            $max = mysqli_num_rows($top);
+            $top_title = $title;
+        }
     }
-?>
+    ?>
 
-                    
-                    <h5 class="card-title">book title:<?= $top_title?></h5>
-                    <h6 class="card-subtitle mb-2  "><?= $max?> times</h6>
-    <?php 
+
+    <h5 class="card-title">book title:<?= $top_title ?></h5>
+    <h6 class="card-subtitle mb-2  "><?= $max ?> times</h6>
+<?php
 
 
 }

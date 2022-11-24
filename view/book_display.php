@@ -18,10 +18,8 @@
         getBooks();
         ?>
     </section>
-    </div>
     <script>
         function filtrer() {
-
             var filtre, section, ligne, cellule, i, text;
             filtre = document.getElementById("recherche").value.toUpperCase();
             section = document.getElementById("section");

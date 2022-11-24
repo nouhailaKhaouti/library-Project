@@ -1,4 +1,3 @@
-
 $('first').parsley();
 
 const userName = document.getElementById("Name");
@@ -9,15 +8,6 @@ const register = document.getElementById("register");
 const button_sign = document.getElementById("registrate");
 const form = document.getElementById("first");
 // data changed
-//signIn.innerHTML = `<button type="submit" class="btn button" onclick="SignIn">Sign In</button>
-//`;
-// register.innerHTML = `<button type="submit" class="btn button" onclick="LogUp()">Register</button>
-// `;
-
-// form.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   CheckInput();
-// });
 
 function LogUp() {
   console.log("hiiii");
@@ -66,21 +56,21 @@ function SignIn() {
   document.getElementById("first").innerHTML = `
                         <img src="image/4.png" alt="4" height="400" width="400">
                         <div class="fw-bold">
-                        <br/>
-                        <br/>
-                        <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                             <div class="nowrap">
-                            <label for="email"> <img src="image/email.png" alt="email" height="20" width="20">Email
-                                Address:</label>
-                            <input class="form-control input-md m-1 cart shadow-sm" type="email" name="email" id="email" placeholder="enter your email address"
-                                required>
+                                <label for="email"> <img src="image/email.png" alt="email" height="20" width="20">Email
+                                    Address:</label>
+                                <input class="form-control input-md m-1 cart shadow-sm" type="email" name="email" id="email" placeholder="enter your email address"
+                                    required>
                             </div>
                             <img src="image/line1.png" alt="" height="20" width="350">
                             <div class="nowrap">
-                            <label for="password"> <img src="image/password.png" alt="password" height="20"
-                                    width="20">Password:</label>
-                            <input class="form-control input-md m-1 cart shadow-sm" type="password" name="password" placeholder="enter the choosing password"
-                                id="password" required>
+                                <label for="password"> <img src="image/password.png" alt="password" height="20"
+                                        width="20">Password:</label>
+                                <input class="form-control input-md m-1 cart shadow-sm" type="password" name="password" placeholder="enter the choosing password"
+                                    id="password" required>
                             </div>
                             </br>
                             </br>
@@ -94,11 +84,8 @@ function SignIn() {
   $("#Modal").modal("show");
 }
 
-
-
 function initTaskForm() {
   // Clear task form from data
   document.forms[0].reset();
   // Hide all action buttons
 }
-

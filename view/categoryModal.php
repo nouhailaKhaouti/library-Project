@@ -8,16 +8,16 @@
             <div class="modal-body modal_body ">
                 <form action="./php/user.php" method="POST" id="third" class="d-flex justify-content-between pe-5">
                     <div class="fw-bold">
-                            <div id="hidden">
-                            </div>
-                            label: &nbsp; &nbsp;
-                            <input class="form-control input-sm m-1 cart shadow-sm" type="text" name="label" id="label" placeholder="enter your userName" required>
-                            <img src="image/line1.png" alt="" height="20" width="350">
-                            </br>
-                            <div class="modal-footer modal_body" id="category_crud">
-                                <button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
-                                <button type="submit" name="save" id="hide" class="btn button ">Create</button>
-                            </div>
+                        <div id="hidden">
+                        </div>
+                        label: &nbsp; &nbsp;
+                        <input class="form-control input-sm m-1 cart shadow-sm" type="text" name="label" id="label" placeholder="enter your userName" required>
+                        <img src="image/line1.png" alt="" height="20" width="350">
+                        </br>
+                        <div class="modal-footer modal_body" id="category_crud">
+                            <button type="button" class="btn bug shadow-sm" data-dismiss="modal">Close</button>
+                            <button type="submit" name="save" id="hide" class="btn button ">Create</button>
+                        </div>
                     </div>
                 </form>
             </div>

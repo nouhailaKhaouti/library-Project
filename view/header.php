@@ -16,15 +16,15 @@ if (isset($_GET["action"]) && $_GET["action"] == "library") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Karla:ital,wght@0,300;1,200;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" defer></script>
     <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
- 
+
     <title>library</title>
 </head>
 
@@ -34,15 +34,15 @@ if (isset($_GET["action"]) && $_GET["action"] == "library") {
         <?php if (isset($_SESSION['user_id'])) : ?>
             <!-- <button class="btn btn-sm button1" onclick="click()"><i class="bi bi-list" ></i></button> -->
             <div id="click">
-            <ul class="list-unstyled text-decoration-none d-flex justify-content-around pt-3 pe-3  ">
-                <li><a class="btn button2 " href="http://localhost/library-project/home.php?action=Home"> Home</a> </li>
-                &nbsp;
-                &nbsp;
-                <li><a class="btn button2 " href="http://localhost/library-project/books.php">Books</a> </li>
-                &nbsp;
-                &nbsp;
-                <li><a class="btn button2 " href="http://localhost/library-project/home.php?action=library">My library</a> </li>
-            </ul>
+                <ul class="list-unstyled text-decoration-none d-flex justify-content-around pt-3 pe-3  ">
+                    <li><a class="btn button2 " href="http://localhost/library-project/home.php?action=Home"> Home</a> </li>
+                    &nbsp;
+                    &nbsp;
+                    <li><a class="btn button2 " href="http://localhost/library-project/books.php">Books</a> </li>
+                    &nbsp;
+                    &nbsp;
+                    <li><a class="btn button2 " href="http://localhost/library-project/home.php?action=library">My library</a> </li>
+                </ul>
             </div>
             <ul class="list-unstyled text-decoration-none d-flex justify-content-around pt-3 pe-3 ">
                 <li class="d-none d-sm-inline"><?= 'hello  ' . $_SESSION['user_name'] ?></li>
@@ -55,7 +55,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "library") {
                 &nbsp;
                 <li><a class="text-decoration-none" href="./php/clearSession.php"><i class="bi bi-box-arrow-right"></i></a></li>
             </ul>
-            
+
         <?php else : ?>
             <ul class="list-unstyled text-decoration-none d-flex justify-content-end pt-3 pe-3 ">
                 <li><button id="signIn" class="btn button" onclick="SignIn()" type="submit">Sign In</button></li>
@@ -66,7 +66,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "library") {
 
         <?php endif ?>
     </header>
-    <hr  class="h-10">
+    <hr class="h-10">
     <?php if (isset($_SESSION['message'])) : ?>
         <div class="alert alert-info alert-dismissible fade show">
             <!-- <strong>Success!</strong> -->
@@ -86,4 +86,3 @@ if (isset($_GET["action"]) && $_GET["action"] == "library") {
             <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
         </div>
     <?php endif ?>
-

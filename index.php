@@ -1,4 +1,4 @@
-<?php  include './view/header.php' ?>
+<?php include './view/header.php' ?>
 <div class="row">
     <section class="m-1 p-3 section-1 col-12">
         <div class="d-flex justify-content-around px-5  ">
@@ -47,9 +47,9 @@
         </div>
     </section>
 </div>
-    <!-- ********************************Connection Modal*************************************** -->
-    <?php
-    include './view/connectionmodal.php'; ?>
-    <!-- ******************************script************************* -->
-    <?php
-    include './view/footer.php'; ?>
+<!-- ********************************Connection Modal*************************************** -->
+<?php
+include './view/connectionmodal.php'; ?>
+<!-- ******************************script************************* -->
+<?php
+include './view/footer.php'; ?>

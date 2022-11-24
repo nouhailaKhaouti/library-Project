@@ -7,15 +7,15 @@
                 <h6>Information</h6>
                 <hr class="mt-0 mb-4">
                 <div class="row pt-1 d-flex flex-wrap">
-                  <div class="col-7 mb-3 col-sm-10">
+                  <div class="col-7 mb-3 col-sm-8">
                     <h6>Email</h6>
                     <p class="text-muted"><?= $_SESSION['email'] ?></p>
                   </div>
-                  <div class="col-3 mb-3 col-sm-5">
+                  <div class="col-3 mb-3 col-sm-4">
                     <h6>User Name</h6>
                     <p class="text-muted"><?= $_SESSION['user_name'] ?></p>
                   </div>
-                  <div class="col-7 mb-3 col-sm-5">
+                  <div class="col-7 mb-3 col-sm-4">
                     <h6>Role</h6>
                     <p class="text-muted"><?php if ($_SESSION['role'] == 0) : ?>
                         Admin
